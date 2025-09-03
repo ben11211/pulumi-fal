@@ -29,8 +29,7 @@ resource "fal_app" "sana_app" {
 - Pulumi CLI installed
 - Python 3.8+ installed
 - uv installed ([installation guide](https://docs.astral.sh/uv/getting-started/installation/))
-- fal CLI installed and available in PATH
-- A valid fal.ai API key
+- fal CLI installed, available in PATH, and authenticated.
 
 ## Setup
 

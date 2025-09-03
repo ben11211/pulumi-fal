@@ -29,9 +29,6 @@ type Client struct {
 }
 
 type AuthOpts struct {
-	Username            string
-	Password            string
-	PrivateKey          string
 	InsecureHTTPAllowed bool
 }
 
@@ -141,18 +138,7 @@ func (c *Client) Delete(ctx context.Context, name string) error {
 }
 
 func (c *Client) cloneRepo(ctx context.Context, gitURL, repoDir string, authOpts *AuthOpts) error {
-	args := []string{"clone"}
-
-	if authOpts != nil {
-		if authOpts.Username != "" && authOpts.Password != "" {
-			cloneURL := strings.Replace(gitURL, "://", "://"+authOpts.Username+":"+authOpts.Password+"@", 1)
-			args = append(args, cloneURL, repoDir)
-		} else {
-			args = append(args, gitURL, repoDir)
-		}
-	} else {
-		args = append(args, gitURL, repoDir)
-	}
+	args := []string{"clone", gitURL, repoDir}
 
 	cmd := exec.CommandContext(ctx, "git", args...)
 	if err := cmd.Run(); err != nil {
@@ -163,14 +149,6 @@ func (c *Client) cloneRepo(ctx context.Context, gitURL, repoDir string, authOpts
 }
 
 func (c *Client) runFalCommand(ctx context.Context, workDir string, args ...string) (string, error) {
-	keyCmd := exec.CommandContext(ctx, "fal", "profile", "key", "set", c.key)
-	keyCmd.Dir = workDir
-	_, keyErr := keyCmd.CombinedOutput()
-
-	if keyErr != nil {
-		return "", fmt.Errorf("failed to set fal profile key: %w", keyErr)
-	}
-
 	cmd := exec.CommandContext(ctx, "fal", args...)
 	cmd.Dir = workDir
 

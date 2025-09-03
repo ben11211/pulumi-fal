@@ -32,11 +32,7 @@ const app = new fal.App("my-app", {
     authMode: "private",
     strategy: "recreate",
     git: {
-        url: "https://github.com/user/repo.git",
-        username: "your-username",      // Optional for HTTP auth
-        password: "your-password",      // Optional for HTTP auth
-        privateKey: "your-private-key", // Optional for SSH auth
-        insecureHttpAllowed: false,     // Optional
+        url: "https://github.com/fal-ai-community/fal-demos.git",
     }
 });
 

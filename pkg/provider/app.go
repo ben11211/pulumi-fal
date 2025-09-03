@@ -100,13 +100,6 @@ func (a *App) Create(ctx context.Context, req infer.CreateRequest[AppArgs]) (inf
 	if req.Inputs.Git != nil {
 		gitURL = req.Inputs.Git.URL
 		authOpts = &fal.AuthOpts{}
-		if req.Inputs.Git.Username != nil && req.Inputs.Git.Password != nil {
-			authOpts.Username = *req.Inputs.Git.Username
-			authOpts.Password = *req.Inputs.Git.Password
-		}
-		if req.Inputs.Git.PrivateKey != nil {
-			authOpts.PrivateKey = *req.Inputs.Git.PrivateKey
-		}
 		if req.Inputs.Git.InsecureHTTPAllowed != nil {
 			authOpts.InsecureHTTPAllowed = *req.Inputs.Git.InsecureHTTPAllowed
 		}
