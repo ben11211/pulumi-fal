@@ -42,19 +42,6 @@ export const revisionId = app.revisionId;
 export const createdAt = app.createdAt;
 ```
 
-#### Arguments
-
-- `name` (string, required): The name of the application
-- `entrypoint` (string, required): The entrypoint for the application (e.g., "app.py:app")
-- `strategy` (string, optional): Deployment strategy ("recreate" or "rolling"). Default: "recreate"
-- `authMode` (string, optional): Authentication mode ("public", "private", or "shared"). Default: "private"
-- `git` (object, optional): Git repository configuration
-  - `url` (string, required): Git repository URL
-  - `username` (string, optional): Username for HTTP authentication
-  - `password` (string, optional): Password for HTTP authentication
-  - `privateKey` (string, optional): Private key for SSH authentication
-  - `insecureHttpAllowed` (boolean, optional): Allow insecure HTTP connections
-
 #### Outputs
 
 - `revisionId` (string): The revision ID of the deployed application
@@ -81,6 +68,8 @@ The provider is built using the [Pulumi Go Provider framework](https://github.co
 1. Clone the repository
 2. Install dependencies: `go mod tidy`
 3. Build: `go build .`
+
+Changes can be locally iterated on in the `examples/python` section. `make setup` will rebuild the provider for testing.
 
 ## License
 
