@@ -2,6 +2,8 @@
 
 A Pulumi provider for managing [fal.ai](https://fal.ai) serverless AI applications.
 
+> **Note**: This is a third-party provider developed independently and is not officially supported by fal.ai
+
 ## Features
 
 - **App Deployment**: Deploy applications from Git repositories to fal.ai
