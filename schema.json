@@ -1,0 +1,145 @@
+{
+  "name": "fal",
+  "version": "0.0.1",
+  "description": "A Pulumi provider for managing fal.ai applications",
+  "keywords": ["pulumi", "fal.ai", "ai", "serverless", "machine-learning"],
+  "homepage": "https://github.com/ben11211/pulumi-provider-fal",
+  "repository": "https://github.com/ben11211/pulumi-provider-fal",
+  "license": "Apache-2.0",
+  "config": {
+    "variables": {
+      "falKey": {
+        "type": "string",
+        "description": "The FAL API key for authentication.",
+        "secret": true
+      }
+    }
+  },
+  "types": {
+    "fal:index:GitConfig": {
+      "description": "Git repository configuration for FAL applications",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The git repository URL"
+        },
+        "username": {
+          "type": "string",
+          "description": "Git username for authentication"
+        },
+        "password": {
+          "type": "string",
+          "description": "Git password for authentication",
+          "secret": true
+        },
+        "privateKey": {
+          "type": "string",
+          "description": "SSH private key for git authentication",
+          "secret": true
+        },
+        "insecureHttpAllowed": {
+          "type": "boolean",
+          "description": "Allow insecure HTTP connections"
+        }
+      },
+      "required": ["url"]
+    }
+  },
+  "provider": {
+    "description": "The provider type for the fal package.",
+    "inputProperties": {
+      "falKey": {
+        "type": "string",
+        "description": "The FAL API key for authentication. Can also be set via FAL_KEY environment variable.",
+        "secret": true
+      }
+    }
+  },
+  "resources": {
+    "fal:index:App": {
+      "description": "A fal.ai application deployed from a git repository",
+      "inputProperties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the application"
+        },
+        "entrypoint": {
+          "type": "string",
+          "description": "The entrypoint for the application"
+        },
+        "strategy": {
+          "type": "string",
+          "description": "Deployment strategy (recreate or rolling)"
+        },
+        "authMode": {
+          "type": "string",
+          "description": "Authentication mode (public, private, or shared)"
+        },
+        "git": {
+          "$ref": "#/types/fal:index:GitConfig",
+          "description": "Git repository configuration"
+        }
+      },
+      "requiredInputs": ["name", "entrypoint"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the application"
+        },
+        "entrypoint": {
+          "type": "string",
+          "description": "The entrypoint for the application"
+        },
+        "strategy": {
+          "type": "string",
+          "description": "Deployment strategy (recreate or rolling)"
+        },
+        "authMode": {
+          "type": "string",
+          "description": "Authentication mode (public, private, or shared)"
+        },
+        "git": {
+          "$ref": "#/types/fal:index:GitConfig",
+          "description": "Git repository configuration"
+        },
+        "revisionId": {
+          "type": "string",
+          "description": "The revision ID of the deployed application"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "When the application was created"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "When the application was last updated"
+        }
+      },
+      "required": ["name", "entrypoint", "revisionId", "createdAt", "updatedAt"]
+    }
+  },
+  "language": {
+    "csharp": {
+      "packageReferences": {
+        "Pulumi": "3.*"
+      }
+    },
+    "go": {
+      "importBasePath": "github.com/ben11211/pulumi-provider-fal/sdk/go/fal"
+    },
+    "nodejs": {
+      "packageName": "@ben11211/pulumi-fal",
+      "packageDescription": "A Pulumi provider for managing fal.ai applications",
+      "dependencies": {
+        "@pulumi/pulumi": "^3.0.0"
+      }
+    },
+    "python": {
+      "packageName": "pulumi_fal",
+      "requires": {
+        "pulumi": ">=3.0.0,<4.0.0"
+      }
+    }
+  }
+}

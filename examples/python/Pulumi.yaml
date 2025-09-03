@@ -1,0 +1,3 @@
+name: pulumi-fal-sana-python
+runtime: python
+description: A Python Pulumi program to deploy a fal Sana app
