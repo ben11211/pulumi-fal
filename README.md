@@ -4,14 +4,6 @@ A Pulumi provider for managing [fal.ai](https://fal.ai) serverless AI applicatio
 
 > **Note**: This is a third-party provider developed independently and is not officially supported by fal.ai
 
-## Features
-
-- **App Deployment**: Deploy applications from Git repositories to fal.ai
-- **Authentication**: Support for FAL_KEY environment variable or provider configuration
-- **Git Integration**: Support for both SSH and HTTP authentication for private repositories
-- **Deployment Strategies**: Support for "recreate" and "rolling" deployment strategies
-- **Auth Modes**: Support for "public", "private", and "shared" authentication modes
-
 ## Installation
 
 Build from source:
@@ -34,8 +26,6 @@ Manages a fal.ai application deployment.
 #### Example Usage
 
 ```typescript
-import * as fal from "@ben11211/pulumi-fal";
-
 const app = new fal.App("my-app", {
     name: "test-app",
     entrypoint: "app.py:app",
